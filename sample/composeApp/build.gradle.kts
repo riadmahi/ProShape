@@ -48,11 +48,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.riadmahi.proshape.sample"
+    namespace = "com.riadmahi.sample"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.riadmahi.proshape"
+        applicationId = "com.riadmahi.sample"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
