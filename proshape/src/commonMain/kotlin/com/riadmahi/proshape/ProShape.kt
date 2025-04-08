@@ -56,5 +56,4 @@ object ProShape {
     fun bottomEndRounded(cornerRadius: Dp = 20.dp): Shape =
         ProSquircleShape(bottomEnd = cornerRadius)
 
-    fun squircle(cornerRadius: Dp = 20.dp): Shape = rounded(cornerRadius)
 }
