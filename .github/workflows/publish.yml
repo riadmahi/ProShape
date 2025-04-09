@@ -1,19 +1,15 @@
-name: Publish ProShape to Maven Central
+name: Publish to Maven Central
 
 on:
-  workflow_dispatch: # ou `push: tags: [v*.*.*]` pour tag-based
+  release:
+    types: [published]
 
 jobs:
   publish:
-    name: Publish library
     runs-on: ubuntu-latest
 
-    env:
-      ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-      ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -21,5 +17,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       - name: Publish to Maven Central
         run: ./gradlew publish --no-daemon --stacktrace
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}

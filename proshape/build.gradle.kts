@@ -1,15 +1,16 @@
-import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.gradle.api.publish.PublishingExtension
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.vanniktech.maven.publish)
+    id("maven-publish")
+    signing
 }
+
 
 kotlin {
     androidTarget {
@@ -75,35 +76,33 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-mavenPublishing {
-    publishToMavenCentral() // Pas besoin de préciser S01
+publishing {
+    publications {
+        withType<MavenPublication>().configureEach {
+            pom {
+                name.set("ProShape")
+                description.set("Beautiful Compose Multiplatform shapes inspired by iOS UI")
+                url.set("https://github.com/riadmahi/ProShape")
 
-    coordinates("com.riadmahi", "proshape", "1.0.0")
-
-    pom {
-        name.set("ProShape")
-        description.set("An open-source Jetpack Compose Multiplatform UI library for beautiful iOS-style shapes.")
-        url.set("https://github.com/riadmahi/ProShape")
-
-        licenses {
-            license {
-                name.set("Apache-2.0")
-                url.set("https://opensource.org/licenses/Apache-2.0")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("riadmahi")
+                        name.set("Riad Mahi")
+                        email.set("contact@riadmahi.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/riadmahi/ProShape.git")
+                    developerConnection.set("scm:git:ssh://github.com:riadmahi/ProShape.git")
+                    url.set("https://github.com/riadmahi/ProShape")
+                }
             }
-        }
-
-        developers {
-            developer {
-                id.set("riadmahi")
-                name.set("Riad Mahi")
-                email.set("contact@riadmahi.com") // ou ton email public
-            }
-        }
-
-        scm {
-            url.set("https://github.com/riadmahi/ProShape")
-            connection.set("scm:git:git://github.com/riadmahi/ProShape.git")
-            developerConnection.set("scm:git:ssh://git@github.com:riadmahi/ProShape.git")
         }
     }
 }
