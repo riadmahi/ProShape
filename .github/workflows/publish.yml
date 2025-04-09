@@ -1,6 +1,7 @@
-name: Publish to Maven Central
+name: 📦 Publish to Maven Central
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
