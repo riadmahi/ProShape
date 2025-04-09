@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.vanniktech.maven.publish)
 }
 
 kotlin {
@@ -73,3 +75,35 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+mavenPublishing {
+    publishToMavenCentral() // Pas besoin de préciser S01
+
+    coordinates("com.riadmahi", "proshape", "1.0.0")
+
+    pom {
+        name.set("ProShape")
+        description.set("An open-source Jetpack Compose Multiplatform UI library for beautiful iOS-style shapes.")
+        url.set("https://github.com/riadmahi/ProShape")
+
+        licenses {
+            license {
+                name.set("Apache-2.0")
+                url.set("https://opensource.org/licenses/Apache-2.0")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("riadmahi")
+                name.set("Riad Mahi")
+                email.set("contact@riadmahi.com") // ou ton email public
+            }
+        }
+
+        scm {
+            url.set("https://github.com/riadmahi/ProShape")
+            connection.set("scm:git:git://github.com/riadmahi/ProShape.git")
+            developerConnection.set("scm:git:ssh://git@github.com:riadmahi/ProShape.git")
+        }
+    }
+}
