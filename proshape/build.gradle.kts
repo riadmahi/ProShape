@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.api.publish.PublishingExtension
@@ -7,8 +8,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    id("maven-publish")
-    signing
+    alias(libs.plugins.vanniktech.maven.publish)
 }
 
 
@@ -76,33 +76,40 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-publishing {
-    publications {
-        withType<MavenPublication>().configureEach {
-            pom {
-                name.set("ProShape")
-                description.set("Beautiful Compose Multiplatform shapes inspired by iOS UI")
-                url.set("https://github.com/riadmahi/ProShape")
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("riadmahi")
-                        name.set("Riad Mahi")
-                        email.set("contact@riadmahi.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:https://github.com/riadmahi/ProShape.git")
-                    developerConnection.set("scm:git:ssh://github.com:riadmahi/ProShape.git")
-                    url.set("https://github.com/riadmahi/ProShape")
-                }
+    coordinates("com.riadmahi", "proshape", "1.0.0")
+
+    pom {
+        name.set("ProShape")
+        description.set("Beautiful Compose Multiplatform shapes inspired by iOS UI")
+        inceptionYear.set("2024")
+        url.set("https://github.com/riadmahi/ProShape")
+
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
             }
+        }
+
+        developers {
+            developer {
+                id.set("riadmahi")
+                name.set("Riad Mahi")
+                email.set("contact@riadmahi.com")
+                url.set("https://github.com/riadmahi")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/riadmahi/ProShape")
+            connection.set("scm:git:git://github.com/riadmahi/ProShape.git")
+            developerConnection.set("scm:git:ssh://git@github.com/riadmahi/ProShape.git")
         }
     }
 }
+
