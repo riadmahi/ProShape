@@ -16,25 +16,52 @@
 
 ---
 
+
 ## 📦 Installation
 
 ProShape is available via **Maven Central**.
 
-Add the dependency to your `build.gradle.kts`:
+You can choose from the following options depending on your setup:
+
+### 🧪 Using Version Catalog (`libs.versions.toml`)
+
+Add the version and library entry in your `libs.versions.toml`:
+
+```toml
+[versions]
+proshape = "<latest-version>"
+
+[libraries]
+proshape = { module = "com.riadmahi:proshape", version.ref = "proshape" }
+```
+
+Then use it in your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.riadmahi.proshape:proshape:<latest-version>")
+    implementation(libs.proshape)
 }
 ```
 
-Or to `build.gradle`:
+### 🛠️ Classic Gradle (KTS)
+
+If you're not using version catalogs:
+
+```kotlin
+dependencies {
+    implementation("com.riadmahi:proshape:<latest-version>")
+}
+```
+
+### ⚙️ Classic Gradle (Groovy)
 
 ```groovy
 dependencies {
-    implementation 'com.riadmahi.proshape:proshape:<latest-version>'
+    implementation 'com.riadmahi:proshape:<latest-version>'
 }
 ```
+
+> 🔁 Replace `<latest-version>` with the latest [release tag version](https://github.com/riadmahi/ProShape/releases).
 
 ---
 
