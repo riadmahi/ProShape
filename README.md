@@ -24,7 +24,7 @@ Add the dependency to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.riadmahi.proshape:proshape:1.0.0")
+    implementation("com.riadmahi.proshape:proshape:<latest-version>")
 }
 ```
 
@@ -32,7 +32,7 @@ Or to `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.riadmahi.proshape:proshape:1.0.0'
+    implementation 'com.riadmahi.proshape:proshape:<latest-version>'
 }
 ```
 
