@@ -80,7 +80,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
 
-    coordinates("com.riadmahi", "proshape", "1.0.0")
+    coordinates("com.riadmahi", "proshape")
 
     pom {
         name.set("ProShape")
